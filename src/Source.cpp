@@ -1,18 +1,17 @@
 #include <SDL.h>
 
+#include "headers/WindowHandler.hpp"
+
 int main(int argc, char* args[])
 {
-	SDL_Init(SDL_INIT_EVERYTHING);
-	SDL_Window* window = SDL_CreateWindow("Pokemon React Clone", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 400, SDL_WINDOW_SHOWN);
-	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+	if (SDL_Init(SDL_INIT_VIDEO))
+		std::cerr << "Error initializing SDL: " << SDL_GetError() << std::endl;
 
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	WindowHandler window{"Pokemon Clone", 1280, 720};
 
-	SDL_RenderClear(renderer);
+	window.Start();
 
-	SDL_RenderPresent(renderer);
-
-	SDL_Delay(3000);
+	SDL_Quit();
 
 	return 0;
 }
